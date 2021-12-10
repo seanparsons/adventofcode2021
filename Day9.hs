@@ -75,7 +75,7 @@ getBasin heights ((row, column), height) = findNeighbouringBasinParts heights (H
 
 findLowPointBasins :: [[Int]] -> [PosSet]
 findLowPointBasins heights =
-  fmap (getBasin heights) $ toListOf ((itraversed <.> itraversed) . withIndex . filtered (isLowest heights)) heights
+  toListOf ((itraversed <.> itraversed) . withIndex . filtered (isLowest heights) . to (getBasin heights)) heights
 
 riskLevel :: [Int] -> Int
 riskLevel heights = getSum $ foldMap (\h -> Sum (h + 1)) heights
